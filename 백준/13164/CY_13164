@@ -1,91 +1,34 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
-public class 공주님의_정원 {
-    static int N, result = 0;
-    static List<Flower> flowers = new ArrayList<>();
-
-    public static void main(String[] args) throws Exception {
+public class Main {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+
+        st = new StringTokenizer(br.readLine());
+        int[] heights = new int[N];
         for (int i = 0; i < N; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            flowers.add(new Flower(Integer.parseInt(st.nextToken()),
-                    Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()),
-                    Integer.parseInt(st.nextToken())));
-        }
-        flowers.sort(((o1, o2) -> {
-            if (o1.startMonth == o2.startMonth) {
-                if (o1.startDate == o2.startDate) {
-                    if (o1.endMonth == o2.endMonth) {
-                        return o1.endDate - o2.endDate;
-                    } else {
-                        return o1.endMonth - o2.endMonth;
-                    }
-                } else {
-                    return o1.startDate - o2.startDate;
-                }
-            }
-            return o1.startMonth - o2.startMonth;
-        }));
-        int currentMonth = 3, currentDate = 1; // 시작 날짜
-        int endMonth = 11, endDate = 30; // 종료 날짜
-        int maxEndMonth = 3, maxEndDate = 1; // 선택한 꽃들의 종료일 중 가장 늦은 날짜
-        int index = 0; // flowers 리스트의 인덱스
-        while (currentMonth < endMonth || (currentMonth == endMonth && currentDate <= endDate)) {
-            boolean found = false;
-
-            // 현재 구간에서 가장 긴 꽃 찾기
-            while (index < flowers.size()) {
-                Flower flower = flowers.get(index);
-                if (flower.startMonth > currentMonth ||
-                        (flower.startMonth == currentMonth && flower.startDate > currentDate)) {
-                    break;
-                }
-                // 가장 늦게까지 피어있는 꽃 선택
-                if (flower.endMonth > maxEndMonth ||
-                        (flower.endMonth == maxEndMonth && flower.endDate > maxEndDate)) {
-                    maxEndMonth = flower.endMonth;
-                    maxEndDate = flower.endDate;
-                    found = true;
-                }
-                index++;
-            }
-
-            if (!found) {
-                result = 0;
-                break;
-            }
-
-            // 현재 날짜를 갱신
-            currentMonth = maxEndMonth;
-            currentDate = maxEndDate;
-            result++; // 선택한 꽃 수 증가
+            heights[i] = Integer.parseInt(st.nextToken());
         }
 
-        // 결과 출력
-        if (currentMonth < endMonth || (currentMonth == endMonth && currentDate < endDate)) {
-            System.out.println(0);
-        } else {
-            System.out.println(result);
+        if (K == 1) {
+            System.out.println(heights[N - 1] - heights[0]);
+            return;
         }
-
-    }
-
-    private static class Flower {
-        int startMonth;
-        int startDate;
-        int endMonth;
-        int endDate;
-
-        Flower(int startMonth, int startDate, int endMonth, int endDate) {
-            this.startMonth = startMonth;
-            this.startDate = startDate;
-            this.endMonth = endMonth;
-            this.endDate = endDate;
+        int[] diffs = new int[N - 1];
+        for (int i = 0; i < N - 1; i++) {
+            diffs[i] = heights[i + 1] - heights[i];
         }
+        Arrays.sort(diffs);
+
+        int totalCost = heights[N - 1] - heights[0];
+        for (int i = 0; i < K - 1; i++) {
+            totalCost -= diffs[N - 2 - i];
+        }
+        System.out.println(totalCost);
     }
 }
