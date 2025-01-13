@@ -10,6 +10,7 @@ public class Main {
 		
 		for (int i = 0; i < str.length(); i++) {
 			dq.offer(String.valueOf(str.charAt(i)));
+			
 			if (dq.size() >= 4) {
                 String fourth = dq.pollLast();
                 String third = dq.pollLast();
