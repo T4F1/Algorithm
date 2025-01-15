@@ -1,5 +1,3 @@
-package org.bj;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class Easy {
+public class CY_2048 {
     static int N;
     static int[][] board;
     static int maxBlock = 0;
