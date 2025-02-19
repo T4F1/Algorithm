@@ -63,7 +63,7 @@
 - [MST(최소 신장 트리)](https://www.acmicpc.net/problemset?sort=ac_desc&algo=49)
     - Kruskal Algorithm(크루스칼)
     - Prim Algorithm(프림)
-    - [Union Find](https://www.acmicpc.net/step/14)
+    - [Union Find(유니온 파인드/분리 집합)](https://www.acmicpc.net/problemset?sort=ac_desc&algo=81)
         - 랭크 최적화
         - 사이즈 최적화
 ### 14주차 [그래프(2)](https://www.acmicpc.net/problemset?sort=ac_desc&algo=7)
