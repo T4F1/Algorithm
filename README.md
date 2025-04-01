@@ -1,4 +1,4 @@
-# Algorithm 15주 완성 프로젝트
+# Algorithm 15주 완성 프로젝트 (完)
 > 매주 수요일 오프라인 스터디 (종료)
 
 [노션 정리](https://chaerish.notion.site/7a1f0416fe3643cc8149f12991b7367a)
